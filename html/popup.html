@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Popup</title>
+    <link rel="stylesheet" href="../css/popup.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+
+<div class="popup-container">
+    <div class="title-container">
+        <img alt="JiraTracker" src="./../img/jira_tracker.png">
+        <h1>Jira Tracker</h1>
+    </div>
+    <div class="timer-container">
+        <div id="timer"></div>
+    </div>
+    <div class="form-container">
+        <div class="input-wrapper">
+            <label for="input_task_name">What are you working on?</label>
+            <input id="input_task_name" name="inputTaskName" type="text" autocomplete="off">
+            <div id="input_task_name_hints"></div>
+        </div>
+        <div class="input-wrapper">
+            <label for="textarea_task_description">Add description</label>
+            <textarea id="textarea_task_description" name="textareaTaskDescription"></textarea>
+        </div>
+        <div class="button-wrapper">
+            <button id="button_task_form_start" type="button">
+                <i class="material-icons">play_arrow</i><span>Start</span>
+            </button>
+            <button id="button_task_form_stop" type="button">
+                <i class="material-icons">stop</i><span>Stop</span>
+            </button>
+        </div>
+    </div>
+    <div id="timer_notification"></div>
+</div>
+
+<script src="../js/popup.js" type="application/javascript"></script>
+</body>
+</html>

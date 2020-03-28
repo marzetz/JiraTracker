@@ -1,0 +1,21 @@
+{
+  "name": "JiraTracker",
+  "version": "1.0",
+  "description": "Build an Extension to track the time for Jira!",
+  "background": {
+    "scripts": ["js/background.js"]
+  },
+  "browser_action": {
+    "default_popup": "html/popup.html",
+    "default_title": "JiraTracker"
+  },
+  "icons": {
+    "128": "img/jira_tracker.png"
+  },
+  "permissions": [
+    "tabs",
+    "storage",
+    "https://*.atlassian.net/"
+  ],
+  "manifest_version": 2
+}

@@ -1,0 +1,73 @@
+.title-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #000000;
+    padding: 20px 0;
+    margin: 0 -60px;
+    color: #FFFFFF;
+}
+
+.title-container h1 {
+    font-size: 40px;
+}
+
+.input-wrapper {
+    margin-top: 15px;
+}
+
+.input-wrapper label {
+    font-size: 14px;
+    padding: 0 10px;
+}
+
+.input-wrapper input, textarea {
+    width: 100%;
+    outline: none;
+    border: 1px solid #cccccc;
+    border-radius: 3px;
+    padding: 10px;
+    margin: 5px 0 0 0;
+    font-size: 14px;
+    background-color: transparent;
+}
+
+.input-wrapper input {
+    font-family: Courier, sans-serif;
+}
+
+.input-wrapper textarea {
+    font-family: Courier, sans-serif;
+    height: 60px;
+    resize: none;
+}
+
+.button-wrapper {
+    text-align: center;
+    margin-top: 40px;
+}
+
+.button-wrapper button {
+    font-family: Courier, sans-serif;
+    font-size: 16px;
+    width: 160px;
+    max-width: 100%;
+    border: none;
+    outline: none;
+    background-color: rgba(0,0,0,.9);
+    color: #FFFFFF;
+    border-radius: 3px;
+    padding: 10px;
+    cursor: pointer;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    transition: box-shadow 0.3s ease-in-out, background-color 0.3s ease-in-out;
+}
+
+.button-wrapper button:hover {
+    background-color: rgba(0,0,0,1);
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+}
+
+.button-wrapper button i, span {
+    vertical-align: middle;
+}
