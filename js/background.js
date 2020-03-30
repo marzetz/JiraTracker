@@ -7,7 +7,8 @@
     let timerRuntime;
     let timerTaskName;
     let timerTaskDescription;
-    let timerInterval;
+    let timerIntervalId;
+    let timerJiraTimeInterval = 5;
 
     await addMessagesListener();
 
@@ -36,8 +37,7 @@
         }
 
         if (!request.data
-            || !request.data.taskName
-            || !request.data.taskDescription) {
+            || !request.data.taskName) {
             return;
         }
 
@@ -63,7 +63,7 @@
 
         timerStartDate = new Date();
         timerStartTime = performance.now();
-        timerInterval = setInterval(intervalCallback, 200);
+        timerIntervalId = setInterval(intervalCallback, 200);
     }
 
     async function stopTimer(request) {
@@ -71,7 +71,18 @@
             return;
         }
 
-        clearInterval(timerInterval);
+        clearInterval(timerIntervalId);
+
+        if (!request.data || !request.data.taskUpload) {
+            const result = confirm('Do you want to upload it to Jira?');
+            if (!result) {
+                handleStopTheTimer();
+                return;
+            }
+        }
+
+        let minutesToSet = Math.ceil(timerStartDate.getMinutes() / timerJiraTimeInterval) * timerJiraTimeInterval;
+        timerStartDate.setMinutes(minutesToSet, 0, 0);
 
         const localISOTime = timerStartDate.toISOString().slice(0, -1);
         const dataToSend = {
@@ -124,7 +135,7 @@
         timerRuntime = undefined;
         timerStartDate = undefined;
         timerStartTime = undefined;
-        timerInterval = undefined;
+        timerIntervalId = undefined;
     }
 
     function handleStopTheTimer() {
@@ -157,7 +168,9 @@
         const runtimeToSeconds = timerRuntime / 1000;
         const totalMinutes = Math.ceil(runtimeToSeconds / 60);
 
-        return `${totalMinutes}m`;
+        const totalTimeIntervalMinutes = Math.ceil(totalMinutes/timerJiraTimeInterval) * timerJiraTimeInterval;
+
+        return `${totalTimeIntervalMinutes}m`;
     }
 
     function showNotification(type, message) {

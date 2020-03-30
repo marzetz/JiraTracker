@@ -23,8 +23,12 @@
             <div id="input_task_name_hints"></div>
         </div>
         <div class="input-wrapper">
-            <label for="textarea_task_description">Add description</label>
+            <label for="textarea_task_description">Add description (optional)</label>
             <textarea id="textarea_task_description" name="textareaTaskDescription"></textarea>
+        </div>
+        <div class="input-wrapper checkbox-wrapper">
+            <input type="checkbox" id="checkbox_task_upload" name="checkboxTaskUpload" checked>
+            <label for="checkbox_task_upload">Upload immediately to Jira</label>
         </div>
         <div class="button-wrapper">
             <button id="button_task_form_start" type="button">

@@ -7,6 +7,7 @@
 
     let elementTaskNameInput;
     let elementTaskDescriptionTextarea;
+    let elementTaskUploadCheckbox;
     let elementTaskDataButtonStart;
     let elementTaskDataButtonStop;
     let elementTaskTimer;
@@ -72,6 +73,7 @@
         elementTaskNameInput = document.querySelector('#input_task_name');
         elementTaskNameInputHints = document.querySelector('#input_task_name_hints');
         elementTaskDescriptionTextarea = document.querySelector('#textarea_task_description');
+        elementTaskUploadCheckbox = document.querySelector('#checkbox_task_upload');
         elementTaskDataButtonStart = document.querySelector('#button_task_form_start');
         elementTaskDataButtonStop = document.querySelector('#button_task_form_stop');
         elementTaskTimer = document.querySelector('#timer');
@@ -127,10 +129,10 @@
         jiraTasksListFiltered.forEach((hint) => {
             const element = document.createElement('A');
             element.innerHTML = hint.key;
-            element.onclick = (() => {
+            element.onclick = () => {
                 elementTaskNameInput.value = hint.key;
                 removeAllHintsElements();
-            });
+            };
             elementTaskNameInputHints.appendChild(element);
         });
     }
@@ -141,8 +143,8 @@
 
         switch (action) {
             case 'start':
-                if (!elementTaskNameInput.value || !elementTaskDescriptionTextarea.value) {
-                    timerShowNotification('error', 'Provide task name and description!');
+                if (!elementTaskNameInput.value) {
+                    timerShowNotification('error', 'Provide task name!');
                     return;
                 }
                 type = 'timer_start';
@@ -155,6 +157,11 @@
                 break;
             case 'stop':
                 type = 'timer_stop';
+                data = {
+                    data: {
+                        taskUpload: elementTaskUploadCheckbox.checked,
+                    },
+                };
                 break;
         }
 
@@ -266,10 +273,11 @@
     }
 
     function fetchJiraTasks() {
+        const assignee = 'jql=assignee=currentUser()';
         const fieldsSet = 'fields=issuetype,summary,status,resolution,created,updated';
-        const maxResults = 'maxResults=1500';
+        const maxResults = 'maxResults=1000';
 
-        const url = `${jiraServerAddress}/rest/api/2/search?${fieldsSet}&${maxResults}`;
+        const url = `${jiraServerAddress}/rest/api/2/search?${assignee}&${fieldsSet}&${maxResults}`;
 
         fetch(url, {
             headers: {"Content-Type": "application/json; charset=utf-8"},

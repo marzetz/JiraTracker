@@ -21,7 +21,7 @@
     padding: 0 10px;
 }
 
-.input-wrapper input, textarea {
+.input-wrapper input:not([type='checkbox']), textarea {
     width: 100%;
     outline: none;
     border: 1px solid #cccccc;
@@ -30,6 +30,11 @@
     margin: 5px 0 0 0;
     font-size: 14px;
     background-color: transparent;
+}
+
+.input-wrapper input[type='checkbox']+label {
+    padding-left: 0;
+    user-select: none;
 }
 
 .input-wrapper input {
